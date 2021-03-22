@@ -1,0 +1,41 @@
+<html>
+<head><title>list of poetes</title></head>
+<body >
+
+<form action = "" method = "get">
+<select name = "lettre">
+	{% for l in lettres  %}
+		<option value = "{{l}}">{{l}}</option>
+	{% endfor %}
+<input type = "submit" value = "filtrer">
+</select >
+</form>
+
+
+{%if accounts|length > 0 %}
+<table>
+        <thead>
+                <tr>
+                        <td>nom</td>
+                        <td>site</td>
+                </tr>
+
+        </thead>
+        <tbody>
+                {% for account in accounts%}
+                <tr>
+                        <td>{{ account.name }}</td>
+                        <td>{{ account.website }} </td>
+                </tr>
+                {% endfor %}
+        </tbody>
+</table>
+{% if accounts.has_previous %}
+        <a href= "?page={{accounts.previous_page_number}}">&lt;</a>
+{% endif %}
+Page {{accounts.number}} de {{accounts.paginator.num_pages}}
+{% if accounts.has_next %}
+        <a href= "?page={{accounts.next_page_number}}">&gt;</a>
+{% endif %}
+{%else%}
+        Auccun account à ajouter
